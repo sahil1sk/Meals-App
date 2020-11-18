@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import './category_meals_screen.dart';
 
-class CategoryItem extends StatelessWidget { 
+class CategoryItem extends StatelessWidget {
+  final String id; 
   final String title;
   final Color color; // Color type is built in flutter not in dart
 
-  CategoryItem(this.title, this.color);
+  CategoryItem(this.id, this.title, this.color);
 
   // this is funtion will trigger when someone tap the grid element
   void selectCategory(BuildContext ctx) {
@@ -15,7 +16,7 @@ class CategoryItem extends StatelessWidget {
     Navigator.of(ctx).push(MaterialPageRoute(
       builder: (context) { // builder has it's own context
         // inside we will return the page which we want to show
-        return CategoryMealsScreen();
+        return CategoryMealsScreen(id, title);
       },
     ));
   }
