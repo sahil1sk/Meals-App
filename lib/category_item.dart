@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import './category_meals_screen.dart';
-
 class CategoryItem extends StatelessWidget {
   final String id; 
   final String title;
@@ -12,13 +10,11 @@ class CategoryItem extends StatelessWidget {
   // this is funtion will trigger when someone tap the grid element
   void selectCategory(BuildContext ctx) {
 
-    // so we are basically adding page above page using push // we using MaterialPageRoute we can also use cupertinoPageRoute
-    Navigator.of(ctx).push(MaterialPageRoute(
-      builder: (context) { // builder has it's own context
-        // inside we will return the page which we want to show
-        return CategoryMealsScreen(id, title);
-      },
-    ));
+    // so we are basically adding page above page using push 
+    Navigator.of(ctx).pushNamed('/category-meals', arguments: { // in arguments we passing the data which we want to send
+      'id': id,
+      'title': title,
+    });
   }
 
   @override
