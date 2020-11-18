@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
+  // you can set the static route name so that without initialize we will use it anywhere
+  static const routeName = '/category-meals'; 
+
   @override
   Widget build(BuildContext context) {
     // Extracting the data from the route

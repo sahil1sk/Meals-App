@@ -29,9 +29,11 @@ class MyApp extends StatelessWidget {
           ),
         )
       ),
-      home: CategoriesScreen(),
+      //home: CategoriesScreen(),
+      initialRoute: '/', // adding the initial route you can also add other like /abc
       routes: { // setting the routes // we use this approach so that it's clear how many routes there are
-        '/category-meals': (ctx) => CategoryMealsScreen(), 
+        '/': (ctx) => CategoriesScreen(), // flutter always go to / this route first but you can also add initial route
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(), 
       },
     );
   }
