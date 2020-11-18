@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
+import './dummy_data.dart';
+import './category_item.dart';
+
 class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView(
-      children: <Widget>[
-
-      ],
+      children: DUMMY_CATEGORIES
+        .map((catData) => CategoryItem(
+            catData.title,
+            catData.color,
+          )
+        ).toList(),
       // Like listView we have GridView, we can also make GridViewBuilder For dynamic like we do for ListView Builder
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,  // width of each box
