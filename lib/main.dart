@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './screens/tabs_screen.dart';
 import './screens/categories_screen.dart';
 import './screens/category_meals_screen.dart';
 import './screens/meal_detail_screen.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       //home: CategoriesScreen(),
       initialRoute: '/', // adding the initial route you can also add other like /abc
       routes: { // setting the routes // we use this approach so that it's clear how many routes there are
-        '/': (ctx) => CategoriesScreen(), // flutter always go to / this route first but you can also add initial route
+        '/': (ctx) => TabsScreen(), // flutter always go to / this route first but you can also add initial route
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(), 
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
       },
