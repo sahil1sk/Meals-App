@@ -16,6 +16,37 @@ class MealItem extends StatelessWidget {
     @required this.affordability,
   });
 
+  // for calculating complexity level we using gatter
+  String get complexityText {
+    switch (complexity) {
+      case Complexity.Simple:
+        return 'Simple';
+        break;
+      case Complexity.Challenging:
+        return 'Challenging';
+        break;
+      case Complexity.Hard:
+        return 'Hard';
+        break;
+      default:
+        return 'Unknown';
+    }
+  }
+
+  // for getting affordability we use this getter
+  String get affordabilityText {
+    switch (affordability){
+      case Affordability.Affordable:
+        return 'Affordable';
+      case Affordability.Pricey:
+        return 'Pricey';
+      case Affordability.Luxurious:
+        return 'Expensive';
+      default:
+        return 'Unknown';
+    }
+  }
+
   void selectMeal() {}
 
   @override
@@ -31,7 +62,7 @@ class MealItem extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Stack( // this wiget will help to add widget one over another
-              children: <Widget>[
+              children: <Widget>[ // in stack bottom children will write first
                 ClipRRect( // this will make inside widget look like its our shape
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15), // giving radius to topleft corner
@@ -44,7 +75,57 @@ class MealItem extends StatelessWidget {
                     fit: BoxFit.cover, // helps to fit into the cover
                   ),
                 ),
+                Positioned( // In Stack Positioned widget is help to set the position of the child element
+                  bottom: 20, // distance from bottom
+                  right: 10,  // distance from right
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 20,
+                    ),
+                    width: 300, 
+                    color: Colors.black54, // transparent black
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 26,
+                        color: Colors.white,
+                      ),
+                      softWrap: true, // if text length is large then come to next line
+                      overflow: TextOverflow.fade, // if the text is large and not fitted then fade it means don't show it normally
+                    ),
+                  ),
+                ),
               ],
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.schedule),
+                      SizedBox(width: 6), // for little spacing
+                      Text('$duration min'),                 
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.work),
+                      SizedBox(width: 6), // for little spacing
+                      Text(complexityText),                 
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.attach_money),
+                      SizedBox(width: 6), // for little spacing
+                      Text(affordabilityText),                 
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
