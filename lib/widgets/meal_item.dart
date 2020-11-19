@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
+import '../screens/meal_detail_screen.dart';
 import '../models/meal.dart'; // for using Complexity type
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -9,6 +12,7 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   MealItem({
+    @required this.id,
     @required this.title, 
     @required this.imageUrl, 
     @required this.duration,
@@ -47,12 +51,16 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  void selectMeal() {}
+  // this function will trigger when we click any card
+  void selectMeal(BuildContext ctx) {
+    // going to meal detail route and passing id as argument
+    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id);
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder( // so here we override the shape of card
           borderRadius: BorderRadius.circular(15) 
