@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/main_drawer.dart';
 
 import './favorites_screen.dart';
 import './categories_screen.dart';
@@ -37,6 +38,7 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title']),
       ),
+      drawer: MainDrawer(),
       body: _pages[_selectedPageIndex]['page'], // setting the page which we want to show
       bottomNavigationBar: BottomNavigationBar( // adding so that our tab will show at bottom
         onTap: _selectPage, // in this we pass the index on which item we click so set according to there index
