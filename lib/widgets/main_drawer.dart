@@ -44,15 +44,15 @@ class MainDrawer extends StatelessWidget {
           buildListTile(
             'Meals', 
             Icons.restaurant,
-            () {
-              Navigator.of(context).pushNamed('/');
+            () { // pushReplacementNamed replace the page with the given page not push any page
+              Navigator.of(context).pushReplacementNamed('/');
             }
           ),
           buildListTile(
             'Filters', 
             Icons.settings,
-            () {
-              Navigator.of(context).pushNamed(FiltersScreen.routeName);
+            () {                     // when only using push use pushReplacement()
+              Navigator.of(context).pushReplacementNamed(FiltersScreen.routeName);
             }
           ),         
         ],
