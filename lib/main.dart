@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
 
   // this funtion is called from the filters_screen.dart
   void _setFilters(Map<String, bool> filterData) {
@@ -47,6 +48,27 @@ class _MyAppState extends State<MyApp> {
         return true; // if we want to keep the meal
       }).toList();
     });
+  }
+
+  void _toggleFavorite(String mealId) {
+    //indexWhere we find then index      
+    final existingIndex = _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if(existingIndex >= 0) { // if we get -1 this means no id is there
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex); // removing the element of the given index
+      });
+    }else {
+      setState(() { // adding the element if it is not there
+        _favoriteMeals.add(
+          DUMMY_MEALS.firstWhere((meal) => meal.id == mealId)
+        );
+      });
+    }
+  }
+
+  bool _isMealFavorite(String id) {
+    // .any if any of them will match with internal condition then send true
+    return _favoriteMeals.any((meal) => meal.id == id);
   }
 
   @override
@@ -75,9 +97,9 @@ class _MyAppState extends State<MyApp> {
       //home: CategoriesScreen(),
       initialRoute: '/', // adding the initial route you can also add other like /abc
       routes: { // setting the routes // we use this approach so that it's clear how many routes there are
-        '/': (ctx) => TabsScreen(), // flutter always go to / this route first but you can also add initial route
+        '/': (ctx) => TabsScreen(_favoriteMeals), // flutter always go to / this route first but you can also add initial route
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(_availableMeals), 
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(_toggleFavorite, _isMealFavorite),
         FiltersScreen.routeName: (ctx) => FiltersScreen(_filters, _setFilters),
       },
       onGenerateRoute: (settings) { // if any route not match while come from pushNamed the generateRoute will take place

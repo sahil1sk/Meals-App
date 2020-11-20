@@ -4,7 +4,12 @@ import '../dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail'; // giving routename
-  
+
+  final Function toggleFavorite;
+  final Function isFavorite;
+
+  MealDetailScreen(this.toggleFavorite, this.isFavorite);
+
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
             margin: EdgeInsets.symmetric(vertical: 10),
@@ -48,6 +53,11 @@ class MealDetailScreen extends StatelessWidget {
                 selectedMeal.imageUrl,
                 fit: BoxFit.cover,
               ),
+            ),
+            FlatButton.icon(
+              icon: Icon(isFavorite(mealId) ? Icons.star : Icons.star_border),
+              onPressed: () => toggleFavorite(mealId), 
+              label: Text(isFavorite(mealId) ? 'Favorite' : 'Add Favorite'),
             ),
             buildSectionTitle(context, 'Ingredients'),
             buildContainer(
