@@ -10,6 +10,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   MealItem({
     @required this.id,
@@ -18,6 +19,7 @@ class MealItem extends StatelessWidget {
     @required this.duration,
     @required this.complexity,
     @required this.affordability,
+    @required this.removeItem,
   });
 
   // for calculating complexity level we using gatter
@@ -54,7 +56,15 @@ class MealItem extends StatelessWidget {
   // this function will trigger when we click any card
   void selectMeal(BuildContext ctx) {
     // going to meal detail route and passing id as argument
-    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id);
+    Navigator.of(ctx).pushNamed(
+      MealDetailScreen.routeName, 
+      arguments: id
+    ).then((result) { // .then is trigger when we come back from the pushed page
+      // we will get result if pass any data through the pop method
+      if(result != null) {
+        removeItem(result);
+      }
+    });
   }
 
   @override
