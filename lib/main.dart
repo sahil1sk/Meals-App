@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './screens/filters_screen.dart';
 import './screens/tabs_screen.dart';
 import './screens/categories_screen.dart';
 import './screens/category_meals_screen.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => TabsScreen(), // flutter always go to / this route first but you can also add initial route
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(), 
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(),
       },
       onGenerateRoute: (settings) { // if any route not match while come from pushNamed the generateRoute will take place
         // print(settings.arguments); // consists args
