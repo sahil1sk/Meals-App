@@ -12,33 +12,36 @@ class MealDetailScreen extends StatelessWidget {
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.headline6, // giving the style of heading6 which define in main.dart file
-            ),
-          );
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        text,
+        style: Theme.of(context)
+            .textTheme
+            .headline6, // giving the style of heading6 which define in main.dart file
+      ),
+    );
   }
 
-  Widget buildContainer({Widget child}){ // {} for passing as name argument
+  Widget buildContainer({Widget child}) {
+    // {} for passing as name argument
     return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10),
-            height: 150, // we are also able to set height and width using media query
-            width: 300,
-            child: child,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
+      height: 150, // we are also able to set height and width using media query
+      width: 300,
+      child: child,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final mealId = ModalRoute.of(context).settings.arguments as String;
-    // firstWhere return the element not the iterable 
+    // firstWhere return the element not the iterable
     final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
 
     return Scaffold(
@@ -54,28 +57,29 @@ class MealDetailScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            FlatButton.icon(
+            TextButton.icon(
               icon: Icon(isFavorite(mealId) ? Icons.star : Icons.star_border),
-              onPressed: () => toggleFavorite(mealId), 
+              onPressed: () => toggleFavorite(mealId),
               label: Text(isFavorite(mealId) ? 'Favorite' : 'Add Favorite'),
             ),
             buildSectionTitle(context, 'Ingredients'),
             buildContainer(
-              child: ListView.builder( // adding dynamic list
-                  itemBuilder: (ctx, index) { //builder function context and index
-                    return Card(
-                      color: Theme.of(context).accentColor,
-                      child: Padding(
+              child: ListView.builder(
+                // adding dynamic list
+                itemBuilder: (ctx, index) {
+                  //builder function context and index
+                  return Card(
+                    color: Theme.of(context).accentColor,
+                    child: Padding(
                         padding: EdgeInsets.symmetric(
-                          vertical: 5, 
-                          horizontal:10,
+                          vertical: 5,
+                          horizontal: 10,
                         ),
-                        child: Text(selectedMeal.ingredients[index])
-                      ),
-                    );
-                  },
-                  itemCount: selectedMeal.ingredients.length,
-                ),
+                        child: Text(selectedMeal.ingredients[index])),
+                  );
+                },
+                itemCount: selectedMeal.ingredients.length,
+              ),
             ),
             buildSectionTitle(context, 'Steps'),
             buildContainer(
@@ -85,7 +89,8 @@ class MealDetailScreen extends StatelessWidget {
                     children: [
                       ListTile(
                         leading: CircleAvatar(
-                          child: Text('# ${(index + 1)}'), // showing Numbering using index
+                          child: Text(
+                              '# ${(index + 1)}'), // showing Numbering using index
                         ),
                         title: Text(selectedMeal.steps[index]),
                       ),
